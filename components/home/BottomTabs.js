@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import colors from "../assets/Colors";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import colors from '../../assets/colors/Colors'
 
 export default function BottomTabs() {
   return (

@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { View, SafeAreaView, StyleSheet, ScrollView } from "react-native";
-import colors from "../assets/Colors";
-
-import HeaderTabs from "../components/home/HeaderTabs";
-import SearchBar from "../components/home/HeaderTabs";
-import Catagories from "../components/home/HeaderTabs";
-import RestaurantItems, {
-  localRestaurants,
-} from "../components/home/HeaderTabs";
-import { Divider } from "react-native-elements/dist/divider/Divider";
-import BottomTabs from "../components/home/HeaderTabs";
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import colors from '../assets/colors/Colors';
+import BottomTabs from '../components/home/BottomTabs';
+import Catagories from '../components/home/Catagories';
+import HeaderTabs from '../components/home/HeaderTabs';
+import RestaurantItems from '../components/home/RestaurantItems';
+import SearchBar from '../components/home/SearchBar';
+import {localRestaurants} from '../components/home/RestaurantItems';
+import {Divider} from 'react-native-elements/dist/divider/Divider';
 
 const YELP_API_KEY =
-  "X92THGPcHr7rU1MTTD6fw2D0Y14w9Be2MqG-2-IPUF8qXdifx9RiRtwmPQfyGk0lioCyTelekTyKDmAlEaZrq2CyWiyyz3E7tsaHzIa2INppUIV3X2VI-GpTk5qTYXYx";
+  'X92THGPcHr7rU1MTTD6fw2D0Y14w9Be2MqG-2-IPUF8qXdifx9RiRtwmPQfyGk0lioCyTelekTyKDmAlEaZrq2CyWiyyz3E7tsaHzIa2INppUIV3X2VI-GpTk5qTYXYx';
 
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState(localRestaurants);
-  const [city, setCity] = useState("newyork");
-  const [activeTab, setActiveTab] = useState("Delivery");
+  const [city, setCity] = useState('newyork');
+  const [activeTab, setActiveTab] = useState('Delivery');
 
   // Fetching data from yelp
   const getRestaurantsFromYelp = () => {
@@ -29,13 +27,13 @@ export default function Home() {
       },
     };
     return fetch(yelpUrl, apiOptions)
-      .then((res) => res.json())
-      .then((json) =>
+      .then(res => res.json())
+      .then(json =>
         setRestaurantData(
-          json.businesses.filter((business) =>
-            business.transactions.includes(activeTab.toLowerCase())
-          )
-        )
+          json.businesses.filter(business =>
+            business.transactions.includes(activeTab.toLowerCase()),
+          ),
+        ),
       );
   };
 
@@ -44,8 +42,14 @@ export default function Home() {
   }, [city, activeTab]);
 
   return (
-    <SafeAreaView style={styles.androidSafeArea}>
-      <View style={{ backgroundColor: colors.grey, padding: 15, borderTopLeftRadius: 20, borderTopRightRadius: 20,  }}>
+    <View style={styles.androidSafeArea}>
+      <View
+        style={{
+          backgroundColor: colors.grey,
+          padding: 15,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        }}>
         <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <SearchBar selectedCity={setCity} />
       </View>
@@ -56,14 +60,13 @@ export default function Home() {
       </ScrollView>
       <Divider width={0.5} />
       <BottomTabs />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   androidSafeArea: {
     flex: 1,
-    paddingTop: 40,
     backgroundColor: colors.black,
   },
 });
