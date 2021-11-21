@@ -3,3 +3,4 @@
 3. React native elements: yarn add react-native-elements This is used for thin line at the bottom navigation.
 4. React native navigation:  yarn add @react-navigation/native
 5. React navigation stack: yarn add @react-navigation/stack
+6. React native gesture handler:yarn add react-native-gesture-handler This is to add swipe feature into the project
